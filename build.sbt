@@ -68,11 +68,15 @@ val defaultScalaCOptions = Seq(
   "-Ywarn-macros:after"
 )
 
+lazy val IntegrationTest = config("it").extend(Test)
+
 lazy val root = project
   .in(file("."))
+  .configs(IntegrationTest)
   .settings(
     name := "fp-todo",
     version := "0.1.0",
+    Defaults.itSettings,
     libraryDependencies ++= Seq(
       "org.typelevel" %% "cats-effect" % catsEffectVersion,
       "org.typelevel" %% "cats-core" % catsVersion,
