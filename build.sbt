@@ -8,11 +8,6 @@ inThisBuild(
 
 scalaVersion := "2.13.6"
 
-val catsEffectVersion = "3.0.1"
-val catsVersion = "2.5.0"
-val circeVersion = "0.14.0-M4"
-val http4sVersion = "0.23.1"
-
 val defaultScalaCOptions = Seq(
   "-Yrangepos", // Required for scalafix
   "-deprecation", // Emit warning and location for usages of deprecated APIs.
@@ -78,25 +73,25 @@ lazy val root = project
     version := "0.1.0",
     Defaults.itSettings,
     libraryDependencies ++= Seq(
-      "org.typelevel" %% "cats-effect" % catsEffectVersion,
-      "org.typelevel" %% "cats-core" % catsVersion,
-      "io.circe" %% "circe-core" % circeVersion,
-      "io.circe" %% "circe-generic" % circeVersion,
-      "io.circe" %% "circe-parser" % circeVersion,
-      "io.circe" %% "circe-literal" % circeVersion,
-      "org.http4s" %% "http4s-blaze-client" % http4sVersion,
-      "org.http4s" %% "http4s-circe" % http4sVersion,
-      "org.http4s" %% "http4s-dsl" % http4sVersion,
-      "org.http4s" %% "http4s-blaze-server" % http4sVersion,
-      "ch.qos.logback" % "logback-classic" % "1.2.3",
-      "org.endpoints4s" %% "algebra" % "1.5.0",
-      "org.endpoints4s" %% "http4s-server" % "7.0.0",
-      "org.endpoints4s" %% "http4s-client" % "5.0.0",
-      "org.endpoints4s" %% "algebra-json-schema" % "1.5.0",
-      "org.endpoints4s" %% "json-schema-generic" % "1.5.0",
-      "org.endpoints4s" %% "json-schema-circe" % "1.5.0",
-      "org.endpoints4s" %% "openapi" % "3.1.0",
-      "com.disneystreaming" %% "weaver-cats" % "0.7.6" % Test
+      "org.typelevel" %% "cats-effect" % DependencyVersions.catsEffect,
+      "org.typelevel" %% "cats-core" % DependencyVersions.cats,
+      "io.circe" %% "circe-core" % DependencyVersions.circe,
+      "io.circe" %% "circe-generic" % DependencyVersions.circe,
+      "io.circe" %% "circe-parser" % DependencyVersions.circe,
+      "io.circe" %% "circe-literal" % DependencyVersions.circe,
+      "org.http4s" %% "http4s-blaze-client" % DependencyVersions.http4s,
+      "org.http4s" %% "http4s-circe" % DependencyVersions.http4s,
+      "org.http4s" %% "http4s-dsl" % DependencyVersions.http4s,
+      "org.http4s" %% "http4s-blaze-server" % DependencyVersions.http4s,
+      "ch.qos.logback" % "logback-classic" % DependencyVersions.logbackClassic,
+      "org.endpoints4s" %% "algebra" % DependencyVersions.endpoints4s.algebra,
+      "org.endpoints4s" %% "http4s-server" % DependencyVersions.endpoints4s.http4sServer,
+      "org.endpoints4s" %% "http4s-client" % DependencyVersions.endpoints4s.http4sClient,
+      "org.endpoints4s" %% "algebra-json-schema" % DependencyVersions.endpoints4s.algebraJsonSchema,
+      "org.endpoints4s" %% "json-schema-generic" % DependencyVersions.endpoints4s.jsonSchemaCirce,
+      "org.endpoints4s" %% "json-schema-circe" % DependencyVersions.endpoints4s.jsonSchemaCirce,
+      "org.endpoints4s" %% "openapi" % DependencyVersions.endpoints4s.openapi,
+      "com.disneystreaming" %% "weaver-cats" % DependencyVersions.weaver % Test
     ),
     testFrameworks += new TestFramework("weaver.framework.CatsEffect"),
     scalacOptions ++= defaultScalaCOptions,
@@ -104,7 +99,7 @@ lazy val root = project
     (assembly / assemblyOutputPath) := new java.io.File("target/app.jar"),
     (assembly / assemblyMergeStrategy) := {
       case "module-info.class" => MergeStrategy.discard
-      case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+      case PathList("META-INF", xs@_*) => MergeStrategy.discard
       case x =>
         val oldStrategy = (assembly / assemblyMergeStrategy).value
         oldStrategy(x)
