@@ -96,7 +96,7 @@ lazy val root = project
       "org.endpoints4s" %% "json-schema-generic" % "1.5.0",
       "org.endpoints4s" %% "json-schema-circe" % "1.5.0",
       "org.endpoints4s" %% "openapi" % "3.1.0",
-      "com.disneystreaming" %% "weaver-cats" % "0.7.6" % Test,
+      "com.disneystreaming" %% "weaver-cats" % "0.7.6" % Test
     ),
     testFrameworks += new TestFramework("weaver.framework.CatsEffect"),
     scalacOptions ++= defaultScalaCOptions,
