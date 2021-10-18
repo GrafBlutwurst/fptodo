@@ -90,8 +90,9 @@ lazy val root = project
       "org.endpoints4s" %% "algebra-json-schema" % DependencyVersions.endpoints4s.algebraJsonSchema,
       "org.endpoints4s" %% "json-schema-generic" % DependencyVersions.endpoints4s.jsonSchemaCirce,
       "org.endpoints4s" %% "json-schema-circe" % DependencyVersions.endpoints4s.jsonSchemaCirce,
-      "org.endpoints4s" %% "openapi" % DependencyVersions.endpoints4s.openapi,
-      "com.disneystreaming" %% "weaver-cats" % DependencyVersions.weaver % Test
+      "org.endpoints4s" %% "openapi" % DependencyVersions.endpoints4s.openapi % Test,
+      "com.disneystreaming" %% "weaver-cats" % DependencyVersions.weaver % Test,
+      "io.swagger.parser.v3" % "swagger-parser" % DependencyVersions.swaggerParser % Test
     ),
     testFrameworks += new TestFramework("weaver.framework.CatsEffect"),
     scalacOptions ++= defaultScalaCOptions,
@@ -99,7 +100,7 @@ lazy val root = project
     (assembly / assemblyOutputPath) := new java.io.File("target/app.jar"),
     (assembly / assemblyMergeStrategy) := {
       case "module-info.class" => MergeStrategy.discard
-      case PathList("META-INF", xs@_*) => MergeStrategy.discard
+      case PathList("META-INF", xs @ _*) => MergeStrategy.discard
       case x =>
         val oldStrategy = (assembly / assemblyMergeStrategy).value
         oldStrategy(x)
@@ -122,4 +123,9 @@ addCommandAlias(
     "scalafmtCheckAll",
     "scalafmtSbtCheck"
   ).mkString("; ")
+)
+
+addCommandAlias(
+  "generateOpenApi",
+  ";it:runMain com.example.OpenApiGenerator"
 )
