@@ -6,32 +6,6 @@ info:
 servers:
 - url: "/"
 paths:
-  ? ""
-  : get:
-      responses:
-        "400":
-          description: "Client error"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/endpoints.Errors"
-                exampleSetFlag: false
-              exampleSetFlag: false
-        "500":
-          description: "Server error"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/endpoints.Errors"
-                exampleSetFlag: false
-              exampleSetFlag: false
-        "200":
-          content:
-            text/plain:
-              schema:
-                type: "string"
-                exampleSetFlag: false
-              exampleSetFlag: false
   /todo/{todo}:
     get:
       parameters:

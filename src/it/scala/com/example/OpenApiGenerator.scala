@@ -15,7 +15,6 @@ object OpenApiGenerator {
       with openapi.JsonEntitiesFromSchemas {
 
       val docs = openApi(openapi.model.Info("FP Todo", "0.1"))(
-        helloWorld,
         getTodo,
         getTodos,
         createTodo
