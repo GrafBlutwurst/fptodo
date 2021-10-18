@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:11.6
+    environment:
+      POSTGRES_DB: fpdb
+      POSTGRES_USER: fpuser
+      POSTGRES_PASSWORD: fppass
+      POSTGRES_PORT: 5432
+    command: -c fsync=off
+    ports:
+      - "5432:5432"
