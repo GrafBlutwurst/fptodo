@@ -9,6 +9,8 @@ object DependencyVersions {
 
   val weaver = "0.7.6"
 
+  val swaggerParser = "2.0.28"
+
   object endpoints4s {
     val algebra = "1.5.0"
     val http4sServer = "7.0.0"

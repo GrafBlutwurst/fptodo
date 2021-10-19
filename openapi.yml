@@ -1,0 +1,151 @@
+---
+openapi: "3.0.0"
+info:
+  title: "FP Todo"
+  version: "0.1"
+servers:
+- url: "/"
+paths:
+  /todo/{todo}:
+    get:
+      parameters:
+      - name: "todo"
+        in: "path"
+        required: true
+        style: "SIMPLE"
+        explode: false
+        schema:
+          type: "string"
+          exampleSetFlag: false
+      responses:
+        "400":
+          description: "Client error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/endpoints.Errors"
+                exampleSetFlag: false
+              exampleSetFlag: false
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/endpoints.Errors"
+                exampleSetFlag: false
+              exampleSetFlag: false
+        "200":
+          content:
+            application/json:
+              schema:
+                required:
+                - "id"
+                - "text"
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                    exampleSetFlag: false
+                  text:
+                    type: "string"
+                    exampleSetFlag: false
+                exampleSetFlag: false
+              exampleSetFlag: false
+        "404": {}
+  /todo:
+    get:
+      responses:
+        "400":
+          description: "Client error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/endpoints.Errors"
+                exampleSetFlag: false
+              exampleSetFlag: false
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/endpoints.Errors"
+                exampleSetFlag: false
+              exampleSetFlag: false
+        "200":
+          content:
+            application/json:
+              schema:
+                type: "array"
+                exampleSetFlag: false
+                items:
+                  required:
+                  - "id"
+                  - "text"
+                  type: "object"
+                  properties:
+                    id:
+                      type: "string"
+                      exampleSetFlag: false
+                    text:
+                      type: "string"
+                      exampleSetFlag: false
+                  exampleSetFlag: false
+              exampleSetFlag: false
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - "text"
+              type: "object"
+              properties:
+                text:
+                  type: "string"
+                  exampleSetFlag: false
+              exampleSetFlag: false
+            exampleSetFlag: false
+      responses:
+        "400":
+          description: "Client error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/endpoints.Errors"
+                exampleSetFlag: false
+              exampleSetFlag: false
+        "500":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/endpoints.Errors"
+                exampleSetFlag: false
+              exampleSetFlag: false
+        "200":
+          content:
+            application/json:
+              schema:
+                required:
+                - "id"
+                - "text"
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                    exampleSetFlag: false
+                  text:
+                    type: "string"
+                    exampleSetFlag: false
+                exampleSetFlag: false
+              exampleSetFlag: false
+components:
+  schemas:
+    endpoints.Errors:
+      type: "array"
+      exampleSetFlag: false
+      items:
+        type: "string"
+        exampleSetFlag: false
+  securitySchemes: {}
+  extensions: {}
